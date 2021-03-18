@@ -28,6 +28,7 @@ public class BatteryMonitor {
 				.get("LOW_TEMPERATURE_BREACH_LIMIT"))) {
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.LowTemperatureError")
 					+ Messages.getString("Battery.AbnormalValue") + battery.temperature);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
@@ -40,6 +41,7 @@ public class BatteryMonitor {
 						.get(BatteryState.TEMPERATURE).get("LOW_TEMPERATURE_WARNING_END_LIMIT"))) {
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.LowTemperatureWarning")
 					+ Messages.getString("Battery.AbnormalValue") + battery.temperature);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
@@ -49,7 +51,8 @@ public class BatteryMonitor {
 				.get("HIGH_TEMPERATURE_BREACH_LIMIT"))) {
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.HighTemperatureError")
 					+ Messages.getString("Battery.AbnormalValue") + battery.temperature);
-	   }
+			battery.batteryStatus = false;
+		}
 		return null;
 	}
 
@@ -62,6 +65,7 @@ public class BatteryMonitor {
 
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.HighTemperatureWarning")
 					+ Messages.getString("Battery.AbnormalValue") + battery.temperature);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
@@ -71,6 +75,7 @@ public class BatteryMonitor {
 				batteryThresholds.batteryStateThresholds.get(BatteryState.SOC).get("LOW_SOC_BREACH_LIMIT"))) {
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.LowSOCError")
 					+ Messages.getString("Battery.AbnormalValue") + battery.stateOfCharge);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
@@ -80,9 +85,10 @@ public class BatteryMonitor {
 				batteryThresholds.batteryStateThresholds.get(BatteryState.SOC).get("LOW_SOC_WARNING_START_LIMIT"))
 				&& checkIfLower(battery.stateOfCharge, batteryThresholds.batteryStateThresholds.get(BatteryState.SOC)
 						.get("LOW_SOC_WARNING_END_LIMIT"))) {
-		
+
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.LowSOCWarning")
 					+ Messages.getString("Battery.AbnormalValue") + battery.stateOfCharge);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
@@ -91,7 +97,8 @@ public class BatteryMonitor {
 		if (checkIfHigher(battery.stateOfCharge,
 				batteryThresholds.batteryStateThresholds.get(BatteryState.SOC).get("HIGH_SOC_BREACH_LIMIT"))) {
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.HighSOCError")
-					+ Messages.getString("Battery.AbnormalValue") + battery.stateOfCharge);		
+					+ Messages.getString("Battery.AbnormalValue") + battery.stateOfCharge);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
@@ -102,16 +109,18 @@ public class BatteryMonitor {
 				&& checkIfLower(battery.stateOfCharge, batteryThresholds.batteryStateThresholds.get(BatteryState.SOC)
 						.get("HIGH_SOC_WARNING_END_LIMIT"))) {
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.HighSOCWarning")
-					+ Messages.getString("Battery.AbnormalValue") + battery.stateOfCharge);		
+					+ Messages.getString("Battery.AbnormalValue") + battery.stateOfCharge);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
 
 	static Void checkForHighChargeRateBreach(Battery battery) {
 		if (checkIfHigher(battery.chargeRate, batteryThresholds.batteryStateThresholds.get(BatteryState.CHARGERATE)
-				.get("HIGH_CHARGERATE_BREACH_LIMIT"))) {	
+				.get("HIGH_CHARGERATE_BREACH_LIMIT"))) {
 			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.HighChargeRateError")
-					+ Messages.getString("Battery.AbnormalValue") + battery.chargeRate);		
+					+ Messages.getString("Battery.AbnormalValue") + battery.chargeRate);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}
@@ -122,8 +131,9 @@ public class BatteryMonitor {
 						.get("HIGH_CHARGERATE_WARNING_START_LIMIT"))
 				&& checkIfLower(battery.stateOfCharge, batteryThresholds.batteryStateThresholds
 						.get(BatteryState.CHARGERATE).get("HIGH_CHARGERATE_WARNING_END_LIMIT"))) {
-		battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.HighChargeRateWarning")
+			battery.statusReporter.printReport(Messages.getString("BatteryStatusChecker.HighChargeRateWarning")
 					+ Messages.getString("Battery.AbnormalValue") + battery.chargeRate);
+			battery.batteryStatus = false;
 		}
 		return null;
 	}

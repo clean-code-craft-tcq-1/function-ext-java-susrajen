@@ -11,7 +11,7 @@ public class Battery {
 	
 	public BatteryStatusReporter statusReporter;
 	
-	
+	public boolean batteryStatus;
 
 	
 	Battery(float temperature, float stateOfCharge, float chargeRate, BatteryStatusReporter statusReporter) {
@@ -19,6 +19,7 @@ public class Battery {
 		this.stateOfCharge = stateOfCharge;
 		this.chargeRate = chargeRate;
 		this.statusReporter = statusReporter;
+		this.batteryStatus = true;
 	}
 	
 	public Battery checkBatteryStatus(Battery battery, Function<Battery, Void> statusCheckFunction) {
