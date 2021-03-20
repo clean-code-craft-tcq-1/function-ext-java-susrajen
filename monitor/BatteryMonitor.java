@@ -8,17 +8,12 @@ public class BatteryMonitor {
 
 	public static Boolean checkForBatteryTemperature(Battery battery) {
 		BatteryTemperatureMonitoring temperatureMonitor = new BatteryTemperatureMonitoring();
-		Boolean highLevelBreach = temperatureMonitor.checkForHighLevelBreach(battery);
-		Boolean highLevelWarning = temperatureMonitor.checkForHighLevelWarning(battery);
-		Boolean lowLevelBreach = temperatureMonitor.checkForLowLevelBreach(battery);
-		Boolean lowLevelWarning = temperatureMonitor.checkForLowLevelWarning(battery);
+		temperatureMonitor.checkForHighLevelBreach(battery);
+		temperatureMonitor.checkForHighLevelWarning(battery);
+		temperatureMonitor.checkForLowLevelBreach(battery);
+		temperatureMonitor.checkForLowLevelWarning(battery);
 
-		if (highLevelBreach || highLevelWarning || lowLevelBreach || lowLevelWarning) {
-			battery.setBatteryStatus(false);
-			return Boolean.FALSE;
-		}
-
-		return Boolean.TRUE;
+		return battery.isBatteryStatus();
 	}
 
 	public static Boolean checkForBatterySOC(Battery battery) {

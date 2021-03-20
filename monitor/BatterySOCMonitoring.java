@@ -19,9 +19,10 @@ BatteryMonitorWarningOfHighLevels, BatteryMonitorWarningOfLowLevels {
 
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.LowSOCWarning")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getStateOfCharge());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -32,9 +33,10 @@ BatteryMonitorWarningOfHighLevels, BatteryMonitorWarningOfLowLevels {
 						.get("HIGH_SOC_WARNING_END_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.HighSOCWarning")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getStateOfCharge());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -43,9 +45,10 @@ BatteryMonitorWarningOfHighLevels, BatteryMonitorWarningOfLowLevels {
 				batteryThresholds.batteryStateThresholds.get(BatteryState.SOC).get("LOW_SOC_BREACH_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.LowSOCError")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getStateOfCharge());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -54,9 +57,10 @@ BatteryMonitorWarningOfHighLevels, BatteryMonitorWarningOfLowLevels {
 				batteryThresholds.batteryStateThresholds.get(BatteryState.SOC).get("HIGH_SOC_BREACH_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.HighSOCError")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getStateOfCharge());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 }

@@ -19,9 +19,10 @@ public class BatteryTemperatureMonitoring implements BatteryMonitorBreachOfHighL
 						.get(BatteryState.TEMPERATURE).get("LOW_TEMPERATURE_WARNING_END_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.LowTemperatureWarning")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getTemperature());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -34,9 +35,10 @@ public class BatteryTemperatureMonitoring implements BatteryMonitorBreachOfHighL
 
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.HighTemperatureWarning")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getTemperature());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -45,9 +47,10 @@ public class BatteryTemperatureMonitoring implements BatteryMonitorBreachOfHighL
 				.get("LOW_TEMPERATURE_BREACH_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.LowTemperatureError")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getTemperature());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -56,9 +59,10 @@ public class BatteryTemperatureMonitoring implements BatteryMonitorBreachOfHighL
 				.get("HIGH_TEMPERATURE_BREACH_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.HighTemperatureError")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getTemperature());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 }

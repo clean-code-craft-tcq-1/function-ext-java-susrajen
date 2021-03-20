@@ -16,9 +16,10 @@ public class BatteryChargeRateMonitoring
 				.get("HIGH_CHARGERATE_BREACH_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.HighChargeRateError")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getChargeRate());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -30,9 +31,10 @@ public class BatteryChargeRateMonitoring
 						.get(BatteryState.CHARGERATE).get("HIGH_CHARGERATE_WARNING_END_LIMIT"))) {
 			battery.getStatusReporter().printReport(BatteryMessages.getString("BatteryStatusChecker.HighChargeRateWarning")
 					+ BatteryMessages.getString("Battery.AbnormalValue") + battery.getChargeRate());
-			return Boolean.TRUE;
+			battery.setBatteryStatus(false);
+			return Boolean.FALSE;
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 
 }
