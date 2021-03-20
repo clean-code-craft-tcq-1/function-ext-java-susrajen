@@ -19,29 +19,20 @@ public class BatteryMonitor {
 	public static Boolean checkForBatterySOC(Battery battery) {
 		BatterySOCMonitoring socMonitor = new BatterySOCMonitoring();
 
-		Boolean highLevelBreach = socMonitor.checkForHighLevelBreach(battery);
-		Boolean highLevelWarning = socMonitor.checkForHighLevelWarning(battery);
-		Boolean lowLevelBreach = socMonitor.checkForLowLevelBreach(battery);
-		Boolean lowLevelWarning = socMonitor.checkForLowLevelWarning(battery);
+		socMonitor.checkForHighLevelBreach(battery);
+		socMonitor.checkForHighLevelWarning(battery);
+		socMonitor.checkForLowLevelBreach(battery);
+		socMonitor.checkForLowLevelWarning(battery);
 
-		if (highLevelBreach || highLevelWarning || lowLevelBreach || lowLevelWarning) {
-			battery.setBatteryStatus(false);
-			return Boolean.FALSE;
-		}
-
-		return Boolean.TRUE;
+		return battery.isBatteryStatus();
 	}
 
 	public static Boolean checkForBatteryChargeRate(Battery battery) {
 		BatteryChargeRateMonitoring chargeRateMonitor = new BatteryChargeRateMonitoring();
-		Boolean highLevelBreach = chargeRateMonitor.checkForHighLevelBreach(battery);
-		Boolean highLevelWarning = chargeRateMonitor.checkForHighLevelWarning(battery);
-		if (highLevelBreach || highLevelWarning) {
-			battery.setBatteryStatus(false);
-			return Boolean.FALSE;
-		}
-
-		return Boolean.TRUE;
+		chargeRateMonitor.checkForHighLevelBreach(battery);
+		chargeRateMonitor.checkForHighLevelWarning(battery);
+		
+		return battery.isBatteryStatus();
 	}
 
 }
