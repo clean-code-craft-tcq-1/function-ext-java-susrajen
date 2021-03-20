@@ -5,13 +5,13 @@ import reporting.BatteryStatusReporter;
 
 public class Battery {
 	
-	public float temperature;
-	public float stateOfCharge;
-	public float chargeRate;
+	float temperature;
+	float stateOfCharge;
+	float chargeRate;
 	
-	public BatteryStatusReporter statusReporter;
+	BatteryStatusReporter statusReporter;
 	
-	public boolean batteryStatus;
+	boolean batteryStatus;
 
 	
 	Battery(float temperature, float stateOfCharge, float chargeRate, BatteryStatusReporter statusReporter) {
@@ -22,8 +22,49 @@ public class Battery {
 		this.batteryStatus = true;
 	}
 	
-	public Battery checkBatteryStatus(Battery battery, Function<Battery, Void> statusCheckFunction) {
+	public Battery checkBatteryStatus(Battery battery, Function<Battery, Boolean> statusCheckFunction) {
 	   statusCheckFunction.apply(this);
 	   return battery;
 	 }
+	
+
+	public float getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(float temperature) {
+		this.temperature = temperature;
+	}
+
+	public float getStateOfCharge() {
+		return stateOfCharge;
+	}
+
+	public void setStateOfCharge(float stateOfCharge) {
+		this.stateOfCharge = stateOfCharge;
+	}
+
+	public float getChargeRate() {
+		return chargeRate;
+	}
+
+	public void setChargeRate(float chargeRate) {
+		this.chargeRate = chargeRate;
+	}
+
+	public BatteryStatusReporter getStatusReporter() {
+		return statusReporter;
+	}
+
+	public void setStatusReporter(BatteryStatusReporter statusReporter) {
+		this.statusReporter = statusReporter;
+	}
+
+	public boolean isBatteryStatus() {
+		return batteryStatus;
+	}
+
+	public void setBatteryStatus(boolean batteryStatus) {
+		this.batteryStatus = batteryStatus;
+	}
 }
